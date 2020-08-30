@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Base from "./Base";
 import "../styles.css";
-import Card from "./Card";
+import Cardp from "./Cardp";
 import { loadCart } from "./helper/cartHelper";
 import StripePayment from "./StripePayment";
-import Paymentb from "./Paymentb";
+import Menu from "./Menu";
+// import Paymentb from "./Paymentb";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -17,17 +18,21 @@ const Cart = () => {
   const loadAllproducts = () => {
     return (
       <div>
-        <h3 className="text-white">Check products here</h3>
+        <h3 className="text-dark bg-warning p-2">Check products here</h3>
+        <br />
+        <br />
         {products.map((product, index) => {
           return (
-            <Card
-              key={index}
-              product={product}
-              removeFromCart={true}
-              addtoCart={false}
-              setreload={setreload}
-              reload={reload}
-            />
+            <div className="mb-4">
+              <Cardp
+                key={index}
+                product={product}
+                removeFromCart={true}
+                addtoCart={false}
+                setreload={setreload}
+                reload={reload}
+              />
+            </div>
           );
         })}
       </div>
@@ -35,18 +40,34 @@ const Cart = () => {
   };
 
   return (
-    <Base title="Cart page" description="Check your products here">
-      <div className="row">
-        <div className="col-6">
+    <div className="container-fluid">
+      <Menu />
+      <br />
+      <br />
+      <h2
+        className="text-center text-info"
+        style={{ flexDirection: "row", justifyContent: "center" }}
+      >
+        <strong
+          style={{ alignSelf: "center" }}
+          className="rounded bg-white p-2"
+        >
+          User Cart
+        </strong>
+      </h2>
+      <br />
+      <div className="row text-center">
+        <div className="col-6 bg-info p-4 rounded mb-4">
           {products.length > 0 ? loadAllproducts() : <h3>Cart is Empty</h3>}
         </div>
         <div className="col-6">
-          {/* <StripePayment products={products} setreload={setreload} /> */}
+          {/* Stripe Payment   */}
+          <StripePayment products={products} setreload={setreload} />
           {/* Braintree Payment */}
-          <Paymentb products={products} setreload={setreload} />
+          {/* <Paymentb products={products} setreload={setreload} /> */}
         </div>
       </div>
-    </Base>
+    </div>
   );
 };
 

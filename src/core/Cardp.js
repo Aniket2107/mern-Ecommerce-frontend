@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import ImageHelper from "./helper/ImageHelper";
 import { Redirect } from "react-router-dom";
 import { addtoCartLS, removeItemFromCart } from "./helper/cartHelper";
+import { Card, Button } from "react-bootstrap";
 
-const Card = ({
+const Cardp = ({
   product,
   addtoCart = true,
   removeFromCart = false,
@@ -32,7 +33,7 @@ const Card = ({
       addtoCart && (
         <button
           onClick={addtoCartClck}
-          className="btn btn-block btn-outline-success mt-2 mb-2"
+          className="btn btn-block mt-2 mb-2 text-white"
         >
           Add to Cart
         </button>
@@ -48,7 +49,7 @@ const Card = ({
             removeItemFromCart(product._id);
             setreload(!reload);
           }}
-          className="btn btn-block btn-outline-danger mt-2 mb-2"
+          className="btn btn-block btn-danger mt-2 mb-2 text-white text-center"
         >
           Remove from cart
         </button>
@@ -56,22 +57,23 @@ const Card = ({
     );
   };
   return (
-    <div className="card text-white bg-dark border border-info ">
-      <div className="card-header lead">{cardTitle}</div>
-      <div className="card-body">
+    <Card
+      style={{ width: "18rem", height: "80vh", width: "27vw" }}
+      className="text-dark"
+    >
+      <ImageHelper product={product} />
+      <Card.Body>
+        <Card.Title>{cardTitle}</Card.Title>
         {performRedirect(redirect)}
-        <ImageHelper product={product} />
-        <p className="lead bg-success font-weight-normal text-wrap">
-          {cardDescription}
-        </p>
-        <p className="btn btn-success rounded  btn-sm px-4">$ {cardPrice}</p>
-        <div className="row">
-          <div className="col-12">{showAddToCart(addtoCart)}</div>
-          <div className="col-12">{showRemoveFromCart(removeFromCart)}</div>
+        <Card.Text>{cardDescription}</Card.Text>
+        <Card.Text className="bg-warning text-dark">$ {cardPrice}</Card.Text>
+        <div style={{ backgroundColor: "#16A085", color: "white" }}>
+          {showAddToCart(addtoCart)}
         </div>
-      </div>
-    </div>
+        <div>{showRemoveFromCart(removeFromCart)}</div>
+      </Card.Body>
+    </Card>
   );
 };
 
-export default Card;
+export default Cardp;

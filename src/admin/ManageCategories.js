@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
 import { deleteCategory, getCategories } from "./helper/adminapicall";
+import Menu from "../core/Menu";
 
 const ManageCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -34,45 +34,60 @@ const ManageCategories = () => {
   }, []);
 
   return (
-    <Base title="Welcome admin" description="Manage categories here">
-      <h2 className="mb-4">All Categories:</h2>
-      <Link className="btn btn-info" to={`/admin/dashboard`}>
-        <span className="">Admin Home</span>
-      </Link>
-      <div className="row">
-        <div className="col-12">
-          <h2 className="text-center text-white my-3">Total Categories</h2>
-
-          {categories.map((category, index) => {
-            return (
-              <div key={index} className="row text-center mb-2 ">
-                <div className="col-4">
-                  <h3 className="text-white text-left">{category.name}</h3>
-                </div>
-                <div className="col-4">
-                  <Link
-                    className="btn btn-success"
-                    to={`/admin/category/update/${category._id}`}
-                  >
-                    <span className="">Update</span>
-                  </Link>
-                </div>
-                <div className="col-4">
-                  <button
-                    onClick={() => {
-                      removeCategory(category._id);
-                    }}
-                    className="btn btn-danger"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+    <div className="container-fluid">
+      <Menu />
+      <div style={{ marginTop: "50px" }}>
+        <h2 className="text-center text-white">Welcome Admin</h2>
+        <p className="text-center text-white">Manage category here</p>
+        <Link
+          className="btn btn-info"
+          to={`/admin/dashboard`}
+          style={{ marginLeft: "50px" }}
+        >
+          <span className="">Admin Home</span>
+        </Link>
+        <div className="container">
+          <br /> <br />
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Category Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody className="text-white">
+              {categories.map((category, idx) => {
+                return (
+                  <tr key={category._id}>
+                    <td>{idx + 1}</td>
+                    <td>{category.name}</td>
+                    <td>
+                      <Link
+                        to={`/admin/category/update/${category._id}`}
+                        className="text-info"
+                      >
+                        Edit
+                      </Link>
+                      |
+                      <a
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          removeCategory(category._id);
+                        }}
+                        className="text-danger"
+                      >
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
-    </Base>
+    </div>
   );
 };
 

@@ -9,8 +9,14 @@ const currenTab = (history, path) => {
 
 const Menu = ({ history }) => {
   return (
-    <div>
-      <ul className="nav nav-tabs bg-dark">
+    <div className="navbar navbar-expand-lg">
+      <Link
+        className="navbar-brand text-warning"
+        style={{ "font-family": "Serif", fontWeight: "700", fontSize: "2rem" }}
+      >
+        ShoeClub
+      </Link>
+      <ul className="nav nav-tabs bg-dark ml-auto">
         <li className="nav-item">
           <Link style={currenTab(history, "/")} className="nav-link" to="/">
             Home
@@ -76,6 +82,7 @@ const Menu = ({ history }) => {
         {isAuthenticated() && (
           <li className="nav-item">
             <span
+              style={{ cursor: "pointer" }}
               className="nav-link text-warning"
               onClick={() => {
                 signout(() => {

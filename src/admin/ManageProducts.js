@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Base from "../core/Base";
 import { isAuthenticated } from "../auth/helper";
 import { Link } from "react-router-dom";
 import { getProducts, deleteProduct } from "./helper/adminapicall";
+import Menu from "../core/Menu";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -34,47 +34,62 @@ const ManageProducts = () => {
   };
 
   return (
-    <Base title="Welcome admin" description="Manage products here">
-      <h2 className="mb-4">All products:</h2>
-      <Link className="btn btn-info" to={`/admin/dashboard`}>
-        <span className="">Admin Home</span>
-      </Link>
-      <div className="row">
-        <div className="col-12">
-          <h2 className="text-center text-white my-3">
-            Total {products.length} products
-          </h2>
-
-          {products.map((product, index) => {
-            return (
-              <div key={index} className="row text-center mb-2 ">
-                <div className="col-4">
-                  <h3 className="text-white text-left">{product.name}</h3>
-                </div>
-                <div className="col-4">
-                  <Link
-                    className="btn btn-success"
-                    to={`/admin/product/update/${product._id}`}
-                  >
-                    <span className="">Update</span>
-                  </Link>
-                </div>
-                <div className="col-4">
-                  <button
-                    onClick={() => {
-                      removeProduct(product._id);
-                    }}
-                    className="btn btn-danger"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+    <div className="container-fluid">
+      <Menu />
+      <div style={{ marginTop: "50px" }}>
+        <h2 className="text-center text-white">Welcome Admin</h2>
+        <p className="text-center text-white">Manage Products here</p>
+        <Link
+          className="btn btn-info"
+          to={`/admin/dashboard`}
+          style={{ marginLeft: "50px" }}
+        >
+          <span className="">Admin Home</span>
+        </Link>
+        <div className="container">
+          <br /> <br />
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody className="text-white">
+              {products.map((prodct, idx) => {
+                return (
+                  <tr key={prodct._id}>
+                    <td>{idx + 1}</td>
+                    <td>{prodct.name}</td>
+                    <td>{prodct.category.name}</td>
+                    <td>
+                      <Link
+                        to={`/admin/product/update/${prodct._id}`}
+                        className="text-info"
+                      >
+                        Edit
+                      </Link>
+                      |
+                      <a
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          removeProduct(prodct._id);
+                        }}
+                        className="text-danger"
+                      >
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
-    </Base>
+    </div>
   );
 };
 

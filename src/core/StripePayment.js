@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { isAuthenticated } from "../auth/helper/index";
-import { loadCart, emptyCart } from "./helper/cartHelper";
+import { emptyCart } from "./helper/cartHelper";
 import { Link } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import { stripePayment } from "./helper/paymentHelper";
@@ -34,7 +34,12 @@ const Payment = ({ products, setreload = (f) => f, reload = undefined }) => {
     stripePayment(userID, token, body)
       .then((res) => {
         console.log("payment sucessful");
-        // createOrder(userID, token, body);
+        createOrder(userID, token, res);
+        emptyCart(() => {
+          console.log("We did it!!! yeah");
+        });
+
+        setreload(!reload);
       })
       .catch((err) => console.log(`frontend stHepler : ${err}`));
   };
@@ -48,20 +53,28 @@ const Payment = ({ products, setreload = (f) => f, reload = undefined }) => {
         name="Stripe gateway"
         shippingAddress
       >
-        <button>Stripe checkout</button>
+        <button className="btn btn-primary text-white mb-3 rounded">
+          Buy Now
+        </button>
       </StripeCheckout>
     ) : (
       <Link to="/signin">
-        <button className="btn btn-danger">SignIn</button>
+        <button className="btn btn-danger rounded mb-3">SignIn</button>
       </Link>
     );
   };
 
   return (
-    <div className="container">
-      <h3>Checkout here</h3>
-      <p>Total amount is {getProductTotal()}</p>
-      {checkOutBtn()}
+    <div className="container mt-4 bg-success rounded">
+      <br />
+      <h3 className="bg-warning text-dark">Checkout here</h3>
+      <br />
+      <h4>
+        Total amount is{" "}
+        <strong className="bg-info text-white">$ {getProductTotal()} </strong>
+      </h4>
+      <br />
+      {products.length > 0 ? checkOutBtn() : null}
     </div>
   );
 };
