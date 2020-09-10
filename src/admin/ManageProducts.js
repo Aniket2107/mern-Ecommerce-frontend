@@ -37,8 +37,8 @@ const ManageProducts = () => {
     <div className="container-fluid">
       <Menu />
       <div style={{ marginTop: "50px" }}>
-        <h2 className="text-center text-white">Welcome Admin</h2>
-        <p className="text-center text-white">Manage Products here</p>
+        <h2 className="text-center text-dark">Welcome Admin</h2>
+        <p className="text-center text-dark">Manage Products here</p>
         <Link
           className="btn btn-info"
           to={`/admin/dashboard`}
@@ -54,16 +54,18 @@ const ManageProducts = () => {
                 <th>#</th>
                 <th>Product Name</th>
                 <th>Category</th>
+                <th>Stock</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody className="text-white">
+            <tbody className="text-dark">
               {products.map((prodct, idx) => {
                 return (
                   <tr key={prodct._id}>
                     <td>{idx + 1}</td>
                     <td>{prodct.name}</td>
                     <td>{prodct.category.name}</td>
+                    <td>{prodct.stock}</td>
                     <td>
                       <Link
                         to={`/admin/product/update/${prodct._id}`}

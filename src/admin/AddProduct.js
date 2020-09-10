@@ -163,11 +163,7 @@ const AddProduct = () => {
         />
       </div>
 
-      <button
-        type="submit"
-        onClick={onSubmit}
-        className="btn btn-outline-success mb-3"
-      >
+      <button type="submit" onClick={onSubmit} className="btn btn-success mb-3">
         Create Product
       </button>
     </form>
@@ -177,12 +173,12 @@ const AddProduct = () => {
     <Base
       title="Add a product here!"
       description="Welcome to product creation section"
-      className="container bg-info p-4"
+      className="container p-4"
     >
       <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
         Admin Home
       </Link>
-      <div className="row bg-dark text-white rounded">
+      <div className="row text-dark rounded">
         <div className="col-md-8 offset-md-2">
           {errorMsg()}
           {successMsg()}

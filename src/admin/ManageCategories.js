@@ -37,8 +37,8 @@ const ManageCategories = () => {
     <div className="container-fluid">
       <Menu />
       <div style={{ marginTop: "50px" }}>
-        <h2 className="text-center text-white">Welcome Admin</h2>
-        <p className="text-center text-white">Manage category here</p>
+        <h2 className="text-center text-dark">Welcome Admin</h2>
+        <p className="text-center text-dark">Manage category here</p>
         <Link
           className="btn btn-info"
           to={`/admin/dashboard`}
@@ -56,7 +56,7 @@ const ManageCategories = () => {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody className="text-white">
+            <tbody className="text-dark">
               {categories.map((category, idx) => {
                 return (
                   <tr key={category._id}>

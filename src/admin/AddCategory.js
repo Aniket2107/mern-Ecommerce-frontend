@@ -76,7 +76,7 @@ const AddCategory = () => {
     <Base
       title="Create Category"
       description="Add new category"
-      className="container bg-info p-4"
+      className="container p-4"
     >
       <div className="row bg-white rounded">
         <div className="col-md-8 offset-md-2">

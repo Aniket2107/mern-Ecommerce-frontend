@@ -1,0 +1,61 @@
+
+.discover-collection-container{
+    min-height: 80vh;
+    padding: 8vh 0;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.bordered{
+    border: 2px solid red;
+}
+
+.big-product-card{
+    height: 70vh;
+    line-height: inherit;
+    background: #e7e7e7;
+}
+.small-product-card{
+    height: 34vh;
+    margin:0.5vh 0;
+    background: #e7e7e7;
+    /* margin-left: 20px; */
+}
+
+.btn-discover{
+    background: white;
+    color: black;
+    border: 0;
+    transition: all .5s ease-in-out;
+}
+.btn-discover:hover{
+    background: #000;
+    color: white;
+}
+
+.hover-shadow{
+    padding: 20px;
+    transition: all .2s ease-in-out;
+}
+
+.hover-shadow:hover{
+    transform: scale(.96);
+    box-shadow: 0px 4px 25px grey;
+}
+
+
+@media only screen and (max-width: 768px){
+    .big-product-card{
+        height: 40vh;
+        margin: 0.5vh 0;
+    }
+    .small-product-card{
+        height: 40vh;
+        margin-left: 0;
+        background: #e7e7e7;
+    }
+
+}

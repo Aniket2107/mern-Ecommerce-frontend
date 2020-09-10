@@ -195,14 +195,14 @@ const UpdateProduct = ({ match }) => {
 
   return (
     <Base
-      title="Add a product here!"
+      title="Update product here!"
       description="Welcome to product creation section"
-      className="container bg-info p-4"
+      className="container p-4"
     >
       <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
         Admin Home
       </Link>
-      <div className="row bg-dark text-white rounded">
+      <div className="row text-dark rounded">
         <div className="col-md-8 offset-md-2">
           {successMessage()}
           {createProductForm()}

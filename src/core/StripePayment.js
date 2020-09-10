@@ -33,7 +33,7 @@ const Payment = ({ products, setreload = (f) => f, reload = undefined }) => {
 
     stripePayment(userID, token, body)
       .then((res) => {
-        console.log("payment sucessful");
+        console.log(res);
         createOrder(userID, token, res);
         emptyCart(() => {
           console.log("We did it!!! yeah");
