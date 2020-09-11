@@ -9,7 +9,7 @@ const ImageHelper = ({ product }) => {
     <div className="rounded p-2">
       <img
         src={imageurl}
-        alt="photo"
+        alt="shoes"
         style={{ height: "40vh", width: "26vw" }}
         className="mb-3 rounded"
       />

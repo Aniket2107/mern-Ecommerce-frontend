@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Base from "../core/Base";
 import { Redirect } from "react-router-dom";
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
+import Menu from "../core/Menu";
 
 const Signin = () => {
   const [values, setValues] = useState({
@@ -23,17 +23,15 @@ const Signin = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
-    signin({ email, password })
-      .then((data) => {
-        if (data.error) {
-          setValues({ ...values, error: data.error, loading: false });
-        } else {
-          authenticate(data, () => {
-            setValues({ ...values, didRedirect: true });
-          });
-        }
-      })
-      .catch(() => console.log("SignIn failed"));
+    signin({ email, password }).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error, loading: false });
+      } else {
+        authenticate(data, () => {
+          setValues({ ...values, didRedirect: true });
+        });
+      }
+    });
   };
 
   const performRedirect = () => {
@@ -52,7 +50,10 @@ const Signin = () => {
   const loadingMessage = () => {
     return (
       loading && (
-        <div className="alert alert-success">
+        <div
+          className="alert alert-success text-center mt-2"
+          style={{ width: "500px" }}
+        >
           <h2>loading....</h2>
         </div>
       )
@@ -62,8 +63,8 @@ const Signin = () => {
   const errorMessage = () => {
     return (
       <div
-        className="alert alert-danger"
-        style={{ display: error ? "" : "none" }}
+        className="alert alert-danger text-center mt-2"
+        style={{ display: error ? "" : "none", width: "500px" }}
       >
         {error}
       </div>
@@ -73,10 +74,10 @@ const Signin = () => {
   const signinform = () => {
     return (
       <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
+        <div className="col-md-6 offset-sm-3 text-start">
           <form>
             <div className="form-group">
-              <label className="text-light">Email</label>
+              <label className="text-dark">Email</label>
               <input
                 className="form-control"
                 type="email"
@@ -85,7 +86,7 @@ const Signin = () => {
               />
             </div>
             <div className="form-group">
-              <label className="text-light">Password</label>
+              <label className="text-dark">Password</label>
               <input
                 className="form-control"
                 type="password"
@@ -103,12 +104,22 @@ const Signin = () => {
   };
 
   return (
-    <Base title="SignIn page" description="User signIn page">
-      {loadingMessage()}
-      {errorMessage()}
-      {signinform()}
-      {performRedirect()}
-    </Base>
+    <div>
+      <Menu />
+      <h1 className="text-center text-info mt-4">Login</h1>
+      <div
+        style={{
+          width: "500px",
+          color: "#000",
+          margin: "auto",
+        }}
+      >
+        {loadingMessage()}
+        {errorMessage()}
+        {signinform()}
+        {performRedirect()}
+      </div>
+    </div>
   );
 };
 

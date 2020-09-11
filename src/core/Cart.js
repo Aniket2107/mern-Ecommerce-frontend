@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Base from "./Base";
 import "../styles.css";
 import Cardp from "./Cardp";
 import { loadCart } from "./helper/cartHelper";
@@ -21,20 +20,21 @@ const Cart = () => {
         <h3 className="text-dark bg-warning p-2">Check products here</h3>
         <br />
         <br />
-        {products.map((product, index) => {
-          return (
-            <div className="mb-4">
-              <Cardp
-                key={index}
-                product={product}
-                removeFromCart={true}
-                addtoCart={false}
-                setreload={setreload}
-                reload={reload}
-              />
-            </div>
-          );
-        })}
+        {products &&
+          products.map((product, index) => {
+            return (
+              <div className="mb-4">
+                <Cardp
+                  key={index}
+                  product={product}
+                  removeFromCart={true}
+                  addtoCart={false}
+                  setreload={setreload}
+                  reload={reload}
+                />
+              </div>
+            );
+          })}
       </div>
     );
   };

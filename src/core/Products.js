@@ -4,12 +4,11 @@ import { getProducts } from "./helper/coreapicalls";
 import Card from "./Cardp";
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState("");
 
   const preload = () => {
     getProducts().then((data) => {
       if (data.error) {
-        return setError("Error fetching data Try refreshing the page ");
+        return console.log("Error fetching data Try refreshing the page ");
       }
       setProducts(data);
     });
@@ -30,7 +29,7 @@ const Products = () => {
       <div className="row text-center p-4 m-4">
         {products.map((prduct, idx) => {
           return (
-            <div className="col-4 mb-3">
+            <div key={idx} className="col-4 mb-3">
               <Card product={prduct} />
             </div>
           );

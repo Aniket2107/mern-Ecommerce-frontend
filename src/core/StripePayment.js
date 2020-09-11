@@ -65,11 +65,11 @@ const Payment = ({ products, setreload = (f) => f, reload = undefined }) => {
   };
 
   return (
-    <div className="container mt-4 bg-success rounded">
+    <div className="container mt-4 bg-secondary rounded">
       <br />
       <h3 className="bg-warning text-dark">Checkout here</h3>
       <br />
-      <h4>
+      <h4 className="text-white">
         Total amount is{" "}
         <strong className="bg-info text-white">$ {getProductTotal()} </strong>
       </h4>

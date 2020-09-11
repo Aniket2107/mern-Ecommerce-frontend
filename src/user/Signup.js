@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { signup } from "../auth/helper";
+import Menu from "../core/Menu";
 
 const SignUp = () => {
   const [values, setValues] = useState({
@@ -41,11 +41,11 @@ const SignUp = () => {
 
   const signupform = () => {
     return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
+      <div className="row text-dark">
+        <div className="col-md-6 offset-sm-3 text-start">
           <form>
             <div className="form-group">
-              <label className="text-light">Name</label>
+              <label className="text-dark">Name</label>
               <input
                 className="form-control"
                 type="text"
@@ -54,7 +54,7 @@ const SignUp = () => {
               />
             </div>
             <div className="form-group">
-              <label className="text-light">Email</label>
+              <label className="text-dark">Email</label>
               <input
                 className="form-control"
                 type="email"
@@ -63,7 +63,7 @@ const SignUp = () => {
               />
             </div>
             <div className="form-group">
-              <label className="text-light">Password</label>
+              <label className="text-dark">Password</label>
               <input
                 className="form-control"
                 type="password"
@@ -99,7 +99,7 @@ const SignUp = () => {
   const errorMessage = () => {
     return (
       <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
+        <div className="col-md-6 offset-sm-3 text-left ">
           <div
             className="alert alert-danger"
             style={{ display: error ? "" : "none" }}
@@ -112,11 +112,21 @@ const SignUp = () => {
   };
 
   return (
-    <Base title="SignUp page" description="User signUP page">
-      {errorMessage()}
-      {successMessage()}
-      {signupform()}
-    </Base>
+    <div>
+      <Menu />
+      <h1 className="text-center text-info mt-4">Register </h1>
+      <div
+        style={{
+          width: "500px",
+          color: "#000",
+          margin: "auto",
+        }}
+      >
+        {errorMessage()}
+        {successMessage()}
+        {signupform()}
+      </div>
+    </div>
   );
 };
 
