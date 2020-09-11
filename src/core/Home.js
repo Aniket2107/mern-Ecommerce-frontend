@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Menu from "./Menu";
 import Hero from "./elements/Hero";
 import DiscoverCollection from "./elements/DiscoverCollection";
