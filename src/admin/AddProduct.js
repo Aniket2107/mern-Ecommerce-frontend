@@ -99,9 +99,9 @@ const AddProduct = () => {
 
   const createProductForm = () => (
     <form>
-      <span>Post photo</span>
+      <span className="text-dark">Select Image:</span>
       <div className="form-group">
-        <label className="btn btn-block btn-success">
+        <label className="btn btn-success text-dark">
           <input
             onChange={handleChange("photo")}
             type="file"
@@ -109,6 +109,7 @@ const AddProduct = () => {
             accept="image"
             placeholder="choose a file"
           />
+          Choose a file
         </label>
       </div>
       <div className="form-group">
@@ -144,7 +145,7 @@ const AddProduct = () => {
           className="form-control"
           placeholder="Category"
         >
-          <option>Select</option>
+          <option>Select category</option>
           {categories &&
             categories.map((cate, index) => (
               <option key={index} value={cate._id}>

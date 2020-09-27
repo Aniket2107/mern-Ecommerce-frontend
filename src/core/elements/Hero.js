@@ -19,7 +19,7 @@ export default class Hero extends Component {
           <div className="row">
             <div className="col-md-6 col-sm-12">
               <img
-                src="/images/model_with_black_clothes_and_glasses.png"
+                src="/images/13.png"
                 alt=""
                 className="img-responsive"
                 style={imageStyle}
@@ -36,9 +36,9 @@ export default class Hero extends Component {
               }}
             >
               <h1>
-                <b>Welcome to our Website</b>
+                <b>Welcome to ShoeClub</b>
               </h1>
-              <p>All we ever do is gonna Blah blah blahx</p>
+              <p>Get brand new shoes at great discounts :) </p>
             </div>
           </div>
         </div>

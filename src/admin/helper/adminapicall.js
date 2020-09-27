@@ -131,3 +131,13 @@ export const deleteProduct = (productId, userId, token) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const getAllFeedbacks = () => {
+  return fetch(`${API}allfeedbacks`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};

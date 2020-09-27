@@ -17,6 +17,7 @@ import Cart from "./core/Cart";
 import NotFound from "./core/NotFound";
 import Products from "./core/Products";
 import Contact from "./core/Contact";
+import Feedbacks from "./admin/Feedbacks";
 
 const Routes = () => {
   return (
@@ -28,6 +29,7 @@ const Routes = () => {
         <Route path="/cart" exact component={Cart} />
         <Route path="/products" exact component={Products} />
         <Route path="/contact" exact component={Contact} />
+        <Route path="/admin/feedbacks" exact component={Feedbacks} />
         <PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
         <AdminRoute

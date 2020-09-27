@@ -20,21 +20,23 @@ const Cart = () => {
         <h3 className="text-dark bg-warning p-2">Check products here</h3>
         <br />
         <br />
-        {products &&
-          products.map((product, index) => {
-            return (
-              <div className="mb-4">
-                <Cardp
-                  key={index}
-                  product={product}
-                  removeFromCart={true}
-                  addtoCart={false}
-                  setreload={setreload}
-                  reload={reload}
-                />
-              </div>
-            );
-          })}
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          {products &&
+            products.map((product, index) => {
+              return (
+                <div className="mb-4">
+                  <Cardp
+                    key={index}
+                    product={product}
+                    removeFromCart={true}
+                    addtoCart={false}
+                    setreload={setreload}
+                    reload={reload}
+                  />
+                </div>
+              );
+            })}
+        </div>
       </div>
     );
   };
@@ -57,7 +59,7 @@ const Cart = () => {
       </h2>
       <br />
       <div className="row text-center">
-        <div className="col-6 bg-info p-4 rounded mb-4">
+        <div className="col-6 bg-light p-4 rounded mb-4">
           {products.length > 0 ? loadAllproducts() : <h3>Cart is Empty</h3>}
         </div>
         <div className="col-6">

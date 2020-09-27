@@ -33,8 +33,8 @@ const AdminDashboard = () => {
             </Link>
           </li>
           <li className="list-group-item">
-            <Link to="/admin/orders" className="nav-link text-success">
-              Manage Order
+            <Link to="/admin/feedbacks" className="nav-link text-success">
+              Feedbacks
             </Link>
           </li>
         </ul>

@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { isAuthenticated } from "../auth/helper/index";
 import { emptyCart } from "./helper/cartHelper";
 import { Link } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import { stripePayment } from "./helper/paymentHelper";
-import { createOrder } from "./helper/orderhelper";
+import { createNewOrder } from "./helper/orderhelper";
 
 const Payment = ({ products, setreload = (f) => f, reload = undefined }) => {
-  const [data, setData] = useState({
-    loading: false,
-    success: false,
-    error: "",
-    address: "",
-  });
-
-  const userID = isAuthenticated() && isAuthenticated()._id;
+  const userID = isAuthenticated() && isAuthenticated().user._id;
   const token = isAuthenticated() && isAuthenticated().token;
 
   const getProductTotal = () => {
@@ -25,20 +18,47 @@ const Payment = ({ products, setreload = (f) => f, reload = undefined }) => {
     return sum;
   };
 
+  const pushAray = () => {
+    let array = [];
+
+    products.map((pdt) => {
+      return array.push(pdt._id);
+    });
+
+    return array;
+  };
+
+  const makeid = () => {
+    var text = "";
+    var possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 10; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  };
+
   const makePayment = () => {
     const body = {
       token,
       products,
     };
 
+    let orderBody = {
+      email: isAuthenticated().user.email,
+      products: pushAray(),
+      total: getProductTotal(),
+      key: makeid(),
+    };
+
     stripePayment(userID, token, body)
       .then((res) => {
-        console.log(res);
-        createOrder(userID, token, res);
+        console.log(orderBody);
+        createNewOrder(userID, token, orderBody);
         emptyCart(() => {
           console.log("We did it!!! yeah");
         });
-
         setreload(!reload);
       })
       .catch((err) => console.log(`frontend stHepler : ${err}`));
@@ -53,28 +73,60 @@ const Payment = ({ products, setreload = (f) => f, reload = undefined }) => {
         name="Stripe gateway"
         shippingAddress
       >
-        <button className="btn btn-primary text-white mb-3 rounded">
-          Buy Now
-        </button>
+        <button className="btn btn-primary btn-lg btn-block">Buy Now</button>
       </StripeCheckout>
     ) : (
       <Link to="/signin">
-        <button className="btn btn-danger rounded mb-3">SignIn</button>
+        <button className="btn btn-danger btn-lg btn-block">SignIn</button>
       </Link>
     );
   };
 
   return (
-    <div className="container mt-4 bg-secondary rounded">
-      <br />
-      <h3 className="bg-warning text-dark">Checkout here</h3>
-      <br />
-      <h4 className="text-white">
-        Total amount is{" "}
-        <strong className="bg-info text-white">$ {getProductTotal()} </strong>
-      </h4>
-      <br />
-      {products.length > 0 ? checkOutBtn() : null}
+    <div className="panel panel-default">
+      <link
+        href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+        rel="stylesheet"
+        id="bootstrap-css"
+      ></link>
+      <div className="panel-heading text-center">
+        <h4>Review Order</h4>
+      </div>
+      <div className="panel-body">
+        <div className="col-md-12" style={{ textAlign: "start" }}>
+          <strong>Subtotal (# item)</strong>
+          <div className="pull-right">
+            <span>$</span>
+            <span>{getProductTotal()}</span>
+          </div>
+        </div>
+        <div className="col-md-12" style={{ textAlign: "start" }}>
+          <strong>Tax</strong>
+          <div className="pull-right">
+            <span>$</span>
+            <span>0.00</span>
+          </div>
+        </div>
+        <div className="col-md-12" style={{ textAlign: "start" }}>
+          <small>Shipping</small>
+          <div className="pull-right">
+            <span>-</span>
+          </div>
+          <hr />
+        </div>
+        <div className="col-md-12">
+          <strong>Order Total</strong>
+          <div className="pull-right">
+            <span>$</span>
+            <span>
+              <strong>{getProductTotal()}</strong>
+            </span>
+          </div>
+          <hr />
+        </div>
+
+        <div>{products.length > 0 ? checkOutBtn() : null}</div>
+      </div>
     </div>
   );
 };
